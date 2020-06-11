@@ -5,6 +5,13 @@
  */
 package Vista;
 
+import Modelo.Conexion;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -14,6 +21,40 @@ public class FrmMantEmp extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmMantEmp
      */
+    void loadPuesto()
+    {
+        try
+        {
+            Conexion con = new Conexion();
+            Connection cn = con.getConexion();
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT codigo_puesto FROM puesto");
+            JCmbPuesto.removeAllItems();
+            while(rs.next()){
+                JCmbPuesto.addItem(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    void loadDepto()
+    {
+        try
+        {
+            Conexion con = new Conexion();
+            Connection cn = con.getConexion();
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT codigo_departamento FROM departamento");
+            JCmbDepto.removeAllItems();
+            while(rs.next()){
+                JCmbDepto.addItem(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
     public FrmMantEmp() {
         initComponents();
     }
