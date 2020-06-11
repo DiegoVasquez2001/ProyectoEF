@@ -5,6 +5,16 @@
  */
 package Vista;
 
+import Modelo.Conexion;
+import Modelo.Hash;
+import Modelo.SqlUsuarios;
+import Modelo.Usuarios;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -14,10 +24,37 @@ public class FrmRegistro extends javax.swing.JFrame {
     /**
      * Creates new form FrmRegistro
      */
+    
+    public void loadTipo()
+    {
+        try
+        {
+            Conexion con = new Conexion();
+            Connection cn = con.getConexion();
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT id FROM tipo_usuario");
+            JCmbTipo.removeAllItems();
+            while(rs.next()){
+                JCmbTipo.addItem(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        
+    }
     public FrmRegistro() {
         initComponents();
+        loadTipo();
     }
-
+    
+    private void limpiar() {
+        txtUsuario.setText("");
+        txtPassword.setText("");
+        txtConfPass.setText("");
+        txtNombre.setText("");
+        txtEmail.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,18 +66,20 @@ public class FrmRegistro extends javax.swing.JFrame {
 
         JPanelRegistro = new javax.swing.JPanel();
         JPanelInfoRegistro = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        JLUsuario = new javax.swing.JLabel();
+        JLContra = new javax.swing.JLabel();
+        JLConCon = new javax.swing.JLabel();
+        JLNom = new javax.swing.JLabel();
+        JLEmail = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        txtConfPass = new javax.swing.JPasswordField();
         JBtnAcceso = new javax.swing.JButton();
         JBtnRegresar = new javax.swing.JButton();
+        JCmbTipo = new javax.swing.JComboBox<>();
+        JLTipo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Usuarios");
@@ -51,30 +90,30 @@ public class FrmRegistro extends javax.swing.JFrame {
         JPanelInfoRegistro.setBackground(new java.awt.Color(204, 204, 204));
         JPanelInfoRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar Usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel1.setText("Usuario:");
+        JLUsuario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JLUsuario.setText("Usuario:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel2.setText("Contraseña:");
+        JLContra.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JLContra.setText("Contraseña:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel3.setText("Confirmar Contraseña:");
+        JLConCon.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JLConCon.setText("Confirmar Contraseña:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel4.setText("Nombre:");
+        JLNom.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JLNom.setText("Nombre:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel5.setText("Email:");
+        JLEmail.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JLEmail.setText("Email:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        txtConfPass.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         JBtnAcceso.setBackground(new java.awt.Color(51, 0, 51));
         JBtnAcceso.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -82,6 +121,11 @@ public class FrmRegistro extends javax.swing.JFrame {
         JBtnAcceso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Add_24x24.png"))); // NOI18N
         JBtnAcceso.setText("Registrar");
         JBtnAcceso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBtnAcceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnAccesoActionPerformed(evt);
+            }
+        });
 
         JBtnRegresar.setBackground(new java.awt.Color(51, 0, 51));
         JBtnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -95,6 +139,11 @@ public class FrmRegistro extends javax.swing.JFrame {
             }
         });
 
+        JCmbTipo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        JLTipo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JLTipo.setText("Tipo de Usuario:");
+
         javax.swing.GroupLayout JPanelInfoRegistroLayout = new javax.swing.GroupLayout(JPanelInfoRegistro);
         JPanelInfoRegistro.setLayout(JPanelInfoRegistroLayout);
         JPanelInfoRegistroLayout.setHorizontalGroup(
@@ -104,22 +153,26 @@ public class FrmRegistro extends javax.swing.JFrame {
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JPanelInfoRegistroLayout.createSequentialGroup()
                         .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(JLConCon)
+                            .addComponent(JLUsuario)
+                            .addComponent(JLContra))
                         .addGap(22, 22, 22)
                         .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField2)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtConfPass)
+                            .addComponent(txtUsuario)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(JPanelInfoRegistroLayout.createSequentialGroup()
                         .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(95, 95, 95)
+                            .addComponent(JLNom)
+                            .addComponent(JLEmail)
+                            .addComponent(JLTipo))
+                        .addGap(56, 56, 56)
                         .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5))))
+                            .addComponent(txtEmail)
+                            .addComponent(txtNombre)
+                            .addGroup(JPanelInfoRegistroLayout.createSequentialGroup()
+                                .addComponent(JCmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(45, 45, 45))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelInfoRegistroLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,25 +186,29 @@ public class FrmRegistro extends javax.swing.JFrame {
             .addGroup(JPanelInfoRegistroLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JLUsuario)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JLContra)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JLConCon)
+                    .addComponent(txtConfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JLNom)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(JLEmail)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JCmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JLTipo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBtnAcceso)
                     .addComponent(JBtnRegresar))
@@ -196,6 +253,52 @@ public class FrmRegistro extends javax.swing.JFrame {
         frmInicio.setVisible(true);
     }//GEN-LAST:event_JBtnRegresarActionPerformed
 
+    private void JBtnAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnAccesoActionPerformed
+        SqlUsuarios modSql = new SqlUsuarios();
+        Usuarios mod = new Usuarios();
+
+        String pass = new String(txtPassword.getPassword());
+        String passC = new String(txtConfPass.getPassword());
+
+        if (txtUsuario.getText().equals("") || pass.equals("") || passC.equals("") || txtNombre.getText().equals("") || txtEmail.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Hay campos vacios, debe llenar todos los datos");
+        } else {
+
+            if (pass.equals(passC)) {
+
+                if (modSql.existeUsuario(txtUsuario.getText()) == 0) {
+
+                    if (modSql.esEmail(txtEmail.getText())) {
+
+                        String nuevoPass = Hash.sha1(pass);
+
+                        mod.setUsuario(txtUsuario.getText());
+                        mod.setPassword(nuevoPass);
+                        mod.setNombre(txtNombre.getText());
+                        mod.setEmail(txtEmail.getText());
+                        int idTipo=0;
+                        idTipo = Integer.parseInt(JCmbTipo.getSelectedItem().toString());
+                        mod.setIdTipo(idTipo);
+
+                        if (modSql.registrar(mod)) {
+                            JOptionPane.showMessageDialog(null, "Registro Guardado");
+                            limpiar();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error al Guardar");
+                            limpiar();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El email es incorrecto");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El usuario ya existe");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+            }
+        }
+    }//GEN-LAST:event_JBtnAccesoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -234,17 +337,19 @@ public class FrmRegistro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBtnAcceso;
     private javax.swing.JButton JBtnRegresar;
+    private javax.swing.JComboBox<String> JCmbTipo;
+    private javax.swing.JLabel JLConCon;
+    private javax.swing.JLabel JLContra;
+    private javax.swing.JLabel JLEmail;
+    private javax.swing.JLabel JLNom;
+    private javax.swing.JLabel JLTipo;
+    private javax.swing.JLabel JLUsuario;
     private javax.swing.JPanel JPanelInfoRegistro;
     private javax.swing.JPanel JPanelRegistro;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JPasswordField txtConfPass;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

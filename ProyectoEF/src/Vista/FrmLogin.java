@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import Modelo.Hash;
+import Modelo.SqlUsuarios;
+import Modelo.Usuarios;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -63,6 +68,11 @@ public class FrmLogin extends javax.swing.JFrame {
         JBtnAcceso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/User_24x24.png"))); // NOI18N
         JBtnAcceso.setText("Acceder");
         JBtnAcceso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBtnAcceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnAccesoActionPerformed(evt);
+            }
+        });
 
         JBtnRegresar.setBackground(new java.awt.Color(51, 0, 51));
         JBtnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -162,6 +172,39 @@ public class FrmLogin extends javax.swing.JFrame {
         frmInicio.setVisible(true);
     }//GEN-LAST:event_JBtnRegresarActionPerformed
 
+    private void JBtnAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnAccesoActionPerformed
+        SqlUsuarios modSql = new SqlUsuarios();
+        Usuarios mod = new Usuarios();
+        
+        String pass = new String(JTextPassword.getPassword());
+        
+        if (!JTextUsuario.getText().equals("") && !pass.equals("")) {
+            
+            String nuevoPass = Hash.sha1(pass);
+            
+            mod.setUsuario(JTextUsuario.getText());
+            mod.setPassword(nuevoPass);
+            
+            if (modSql.login(mod)) {
+                FrmInicio.frmLog = null;
+                this.dispose();
+                
+                Contenedor frmMenu = new Contenedor(mod);
+                frmMenu.setVisible(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos incorrectos");
+                limpiar();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar sus datos");
+        }
+    }//GEN-LAST:event_JBtnAccesoActionPerformed
+    
+    private void limpiar() {
+        JTextUsuario.setText("");
+        JTextPassword.setText("");
+    }
     /**
      * @param args the command line arguments
      */
