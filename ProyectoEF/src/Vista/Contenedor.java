@@ -120,10 +120,20 @@ public class Contenedor extends javax.swing.JFrame {
 
         ItemPuestos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Copy v2_16x16.png"))); // NOI18N
         ItemPuestos.setText("Puestos");
+        ItemPuestos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemPuestosActionPerformed(evt);
+            }
+        });
         MenuCatalogos.add(ItemPuestos);
 
         ItemDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Copy v2_16x16.png"))); // NOI18N
         ItemDepartamento.setText("Departamentos");
+        ItemDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemDepartamentoActionPerformed(evt);
+            }
+        });
         MenuCatalogos.add(ItemDepartamento);
 
         jMenuBar1.add(MenuCatalogos);
@@ -182,6 +192,18 @@ public class Contenedor extends javax.swing.JFrame {
         frmNom.setVisible(true);
         JDesk.add(frmNom);
     }//GEN-LAST:event_ItemNominaActionPerformed
+
+    private void ItemPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemPuestosActionPerformed
+        FrmMantCargos frmCarg = new FrmMantCargos();
+        frmCarg.setVisible(true);
+        JDesk.add(frmCarg);
+    }//GEN-LAST:event_ItemPuestosActionPerformed
+
+    private void ItemDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemDepartamentoActionPerformed
+        FrmMantDeptos frmDept = new FrmMantDeptos();
+        frmDept.setVisible(true);
+        JDesk.add(frmDept);
+    }//GEN-LAST:event_ItemDepartamentoActionPerformed
 
     /**
      * @param args the command line arguments

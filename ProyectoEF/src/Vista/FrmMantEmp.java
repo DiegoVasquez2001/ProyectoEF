@@ -5,6 +5,13 @@
  */
 package Vista;
 
+import Modelo.Conexion;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -14,8 +21,44 @@ public class FrmMantEmp extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmMantEmp
      */
+    void loadPuesto()
+    {
+        try
+        {
+            Conexion con = new Conexion();
+            Connection cn = con.getConexion();
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT codigo_puesto FROM puesto");
+            JCmbPuesto.removeAllItems();
+            while(rs.next()){
+                JCmbPuesto.addItem(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    void loadDepto()
+    {
+        try
+        {
+            Conexion con = new Conexion();
+            Connection cn = con.getConexion();
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT codigo_departamento FROM departamento");
+            JCmbDepto.removeAllItems();
+            while(rs.next()){
+                JCmbDepto.addItem(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
     public FrmMantEmp() {
         initComponents();
+        loadPuesto();
+        loadDepto();
     }
 
     /**
@@ -91,6 +134,11 @@ public class FrmMantEmp extends javax.swing.JInternalFrame {
 
         btnAlta.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
 
         btnBaja.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnBaja.setText("Baja");
@@ -209,6 +257,25 @@ public class FrmMantEmp extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    Conexion con = new Conexion();
+    Connection cn = con.getConexion();
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        try{
+            java.sql.PreparedStatement pst = cn.prepareStatement("insert into empleado values(?,?,?,?,?)");
+            pst.setString(1, JTxtNombre.getText().trim());
+            pst.setString(2, JCmbPuesto.getSelectedItem().toString());
+            pst.setString(3, JCmbDepto.getSelectedItem().toString());
+            pst.setString(4, JTxtSueldo.getText().toString());
+            pst.setString(5, JCmbEstado.getSelectedItem().toString());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Registro Realizado!");
+            JTxtNombre.setText("");
+            JTxtSueldo.setText("");
+        }
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnAltaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
