@@ -15,6 +15,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class FrmInicio extends javax.swing.JFrame {
 
+    static Object frmLog;
+
     /**
      * Creates new form FrmLogin
      */
