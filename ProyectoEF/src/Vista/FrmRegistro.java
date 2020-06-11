@@ -39,6 +39,8 @@ public class FrmRegistro extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
+        JBtnAcceso = new javax.swing.JButton();
+        JBtnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Usuarios");
@@ -74,6 +76,25 @@ public class FrmRegistro extends javax.swing.JFrame {
 
         jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
+        JBtnAcceso.setBackground(new java.awt.Color(51, 0, 51));
+        JBtnAcceso.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JBtnAcceso.setForeground(new java.awt.Color(255, 255, 255));
+        JBtnAcceso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Add_24x24.png"))); // NOI18N
+        JBtnAcceso.setText("Registrar");
+        JBtnAcceso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        JBtnRegresar.setBackground(new java.awt.Color(51, 0, 51));
+        JBtnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        JBtnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        JBtnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Log Out_24x24.png"))); // NOI18N
+        JBtnRegresar.setText("Regresar");
+        JBtnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnRegresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JPanelInfoRegistroLayout = new javax.swing.GroupLayout(JPanelInfoRegistro);
         JPanelInfoRegistro.setLayout(JPanelInfoRegistroLayout);
         JPanelInfoRegistroLayout.setHorizontalGroup(
@@ -100,6 +121,12 @@ public class FrmRegistro extends javax.swing.JFrame {
                             .addComponent(jTextField4)
                             .addComponent(jTextField5))))
                 .addGap(45, 45, 45))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelInfoRegistroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JBtnAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JBtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         JPanelInfoRegistroLayout.setVerticalGroup(
             JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +151,11 @@ public class FrmRegistro extends javax.swing.JFrame {
                 .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(JPanelInfoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBtnAcceso)
+                    .addComponent(JBtnRegresar))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout JPanelRegistroLayout = new javax.swing.GroupLayout(JPanelRegistro);
@@ -158,6 +189,12 @@ public class FrmRegistro extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JBtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnRegresarActionPerformed
+        this.dispose();
+        FrmInicio frmInicio = new FrmInicio();
+        frmInicio.setVisible(true);
+    }//GEN-LAST:event_JBtnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +232,8 @@ public class FrmRegistro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBtnAcceso;
+    private javax.swing.JButton JBtnRegresar;
     private javax.swing.JPanel JPanelInfoRegistro;
     private javax.swing.JPanel JPanelRegistro;
     private javax.swing.JLabel jLabel1;
