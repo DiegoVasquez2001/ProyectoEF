@@ -51,9 +51,10 @@ public class Contenedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        JDesk = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuAbrir = new javax.swing.JMenu();
+        ItemSalir = new javax.swing.JMenuItem();
         MenuCatalogos = new javax.swing.JMenu();
         MenuProcesos = new javax.swing.JMenu();
         MenuInformes = new javax.swing.JMenu();
@@ -62,22 +63,33 @@ public class Contenedor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDesktopPane1.setBackground(new java.awt.Color(51, 51, 51));
+        JDesk.setBackground(new java.awt.Color(51, 51, 51));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout JDeskLayout = new javax.swing.GroupLayout(JDesk);
+        JDesk.setLayout(JDeskLayout);
+        JDeskLayout.setHorizontalGroup(
+            JDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 750, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        JDeskLayout.setVerticalGroup(
+            JDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 479, Short.MAX_VALUE)
         );
 
         MenuAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Open_16x16.png"))); // NOI18N
         MenuAbrir.setText("Abrir");
         MenuAbrir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        ItemSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ItemSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Log Out_16x16.png"))); // NOI18N
+        ItemSalir.setText("Salir del Sistema");
+        ItemSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemSalirActionPerformed(evt);
+            }
+        });
+        MenuAbrir.add(ItemSalir);
+
         jMenuBar1.add(MenuAbrir);
 
         MenuCatalogos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Folder_16x16.png"))); // NOI18N
@@ -112,15 +124,21 @@ public class Contenedor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(JDesk)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(JDesk)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemSalirActionPerformed
+        this.dispose();
+        FrmInicio frmInicio = new FrmInicio();
+        frmInicio.setVisible(true);
+    }//GEN-LAST:event_ItemSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,13 +176,14 @@ public class Contenedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemSalir;
+    private javax.swing.JDesktopPane JDesk;
     private javax.swing.JMenu MenuAbrir;
     private javax.swing.JMenu MenuAyuda;
     private javax.swing.JMenu MenuCatalogos;
     private javax.swing.JMenu MenuHerramientas;
     private javax.swing.JMenu MenuInformes;
     private javax.swing.JMenu MenuProcesos;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
