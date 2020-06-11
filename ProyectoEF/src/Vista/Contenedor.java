@@ -56,6 +56,10 @@ public class Contenedor extends javax.swing.JFrame {
         MenuAbrir = new javax.swing.JMenu();
         ItemSalir = new javax.swing.JMenuItem();
         MenuCatalogos = new javax.swing.JMenu();
+        ItemEmpleado = new javax.swing.JMenuItem();
+        ItemNomina = new javax.swing.JMenuItem();
+        ItemPuestos = new javax.swing.JMenuItem();
+        ItemDepartamento = new javax.swing.JMenuItem();
         MenuProcesos = new javax.swing.JMenu();
         MenuInformes = new javax.swing.JMenu();
         MenuHerramientas = new javax.swing.JMenu();
@@ -95,6 +99,33 @@ public class Contenedor extends javax.swing.JFrame {
         MenuCatalogos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Folder_16x16.png"))); // NOI18N
         MenuCatalogos.setText("Catalogos");
         MenuCatalogos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        ItemEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/User_16x16.png"))); // NOI18N
+        ItemEmpleado.setText("Empleado");
+        ItemEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemEmpleadoActionPerformed(evt);
+            }
+        });
+        MenuCatalogos.add(ItemEmpleado);
+
+        ItemNomina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Copy v2_16x16.png"))); // NOI18N
+        ItemNomina.setText("Nomina");
+        ItemNomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemNominaActionPerformed(evt);
+            }
+        });
+        MenuCatalogos.add(ItemNomina);
+
+        ItemPuestos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Copy v2_16x16.png"))); // NOI18N
+        ItemPuestos.setText("Puestos");
+        MenuCatalogos.add(ItemPuestos);
+
+        ItemDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Copy v2_16x16.png"))); // NOI18N
+        ItemDepartamento.setText("Departamentos");
+        MenuCatalogos.add(ItemDepartamento);
+
         jMenuBar1.add(MenuCatalogos);
 
         MenuProcesos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Check_16x16.png"))); // NOI18N
@@ -140,6 +171,18 @@ public class Contenedor extends javax.swing.JFrame {
         frmInicio.setVisible(true);
     }//GEN-LAST:event_ItemSalirActionPerformed
 
+    private void ItemEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemEmpleadoActionPerformed
+        FrmMantEmp frmMantEmp = new FrmMantEmp();
+        frmMantEmp.setVisible(true);
+        JDesk.add(frmMantEmp);
+    }//GEN-LAST:event_ItemEmpleadoActionPerformed
+
+    private void ItemNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemNominaActionPerformed
+        FrmMantConcepto frmNom = new FrmMantConcepto();
+        frmNom.setVisible(true);
+        JDesk.add(frmNom);
+    }//GEN-LAST:event_ItemNominaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -176,6 +219,10 @@ public class Contenedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemDepartamento;
+    private javax.swing.JMenuItem ItemEmpleado;
+    private javax.swing.JMenuItem ItemNomina;
+    private javax.swing.JMenuItem ItemPuestos;
     private javax.swing.JMenuItem ItemSalir;
     private javax.swing.JDesktopPane JDesk;
     private javax.swing.JMenu MenuAbrir;
